@@ -38,7 +38,7 @@ export default function RecordAudio() {
           onStop={onStop}
           onData={onData}
           strokeColor="#ffffff"
-          backgroundColor="#314a5e" />
+          backgroundColor="#3000F6" />
           </div>
           <div className="row">
           <Button variant="contained" onClick={startRecording} type="button">Start</Button>
