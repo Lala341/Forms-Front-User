@@ -102,13 +102,18 @@ export default class rtc_connection {
         this.socket.emit(event, msg);
     }
 
+    registrarCallbackMensajes(funcion) {
+        if (this.dataChannel) {
+            this.dataChannel.addEventListener('message', funcion);
+        }
+    }
 
 
     async makeCall() {
         console.log("WebRTC>> makeCall()");
 
         this.localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        
+
 
         this.localStream.getTracks().forEach(track => {
             this.peerConnection.addTrack(track, this.localStream);
@@ -148,8 +153,8 @@ export default class rtc_connection {
      * @param {nodo} nodeId 
      */
     connectVideoToNode(nodeId) {
-    const remoteVideo = document.querySelector('#' + nodeId);
-                remoteVideo.srcObject = this.localStream;
+        const remoteVideo = document.querySelector('#' + nodeId);
+        remoteVideo.srcObject = this.localStream;
     }
 
 
