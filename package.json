@@ -15,10 +15,13 @@
     "react-images-upload": "^1.2.8",
     "react-images-uploading": "^2.2.0",
     "react-mic": "^12.4.6",
+    "react-multimedia-capture": "^1.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "webrtc-adapter": "^7.6.2",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "react-video-recorder": "^3.17.1",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
