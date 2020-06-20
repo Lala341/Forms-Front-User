@@ -1,18 +1,15 @@
 import React from 'react';
 import './App.css';
-import Image from "./components/uploadImages/uploadImages";
-import RecordAudio from "./components/recordAudio/recordAudio";
 import {Singleton} from './components/webrtc_connection/singleton';
 import VideoExample from './components/recordVideo/video';
+import 'react-notifications-component/dist/theme.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Route
 } from "react-router-dom";
 import General from './General';
+import ReactNotification from 'react-notifications-component';
 
 function App() {
   console.log('Hello World!');
@@ -29,14 +26,15 @@ function App() {
 <Router>
   <Switch>
       <Route exact path="/">
-        <General />
+        <General rtc={rtc}/>
         </Route>
         <Route  exact path="/video">
-          <VideoExample />
+          <VideoExample rtc={rtc} />
         </Route>
         </Switch>
 </Router>
-      
+<ReactNotification />
+
     </div>
   );
 }

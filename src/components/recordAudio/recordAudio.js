@@ -30,15 +30,16 @@ export default function RecordAudio() {
  
   
     return (
-      <div>
-          <div className="row">
+      <div style={{textAlign: "center"}}>
+          <div className="row" style={{width: "400px"}}>
               <ReactMic
           record={record}
           className="sound-wave"
           onStop={onStop}
           onData={onData}
-          strokeColor="#ffffff"
-          backgroundColor="#3000F6" />
+          strokeColor="#3000F6"
+          backgroundColor="#ffffff"
+           />
           </div>
           <div className="row">
           <Button variant="contained" onClick={startRecording} type="button">Start</Button>

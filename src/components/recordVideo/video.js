@@ -1,6 +1,6 @@
 import React from 'react';
-import VideoRecorder from 'react-video-recorder';
 import DisconnectedView from 'react-video-recorder';
+import VideoRecorder from 'react-video-recorder';
 
 export default function VideoExample(){
     return (
