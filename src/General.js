@@ -161,9 +161,17 @@ function Formulario(){
   this.numMotor = '';
   this.numSerie = '';
   this.combustible = '';
-  this.color = '';
+  this.colores = '';
   this.cilindrada = '';
   this.potencia = '';
+  this.capacidad = '';
+  this.clase = '';
+  this.vin = '';
+  this.marca = '';
+  this.linea = '';
+  this.modelo = '';
+  this.blindaje = '';
+  this.desmonteBlindaje = '';
 }
 
 export default General;
