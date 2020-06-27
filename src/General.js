@@ -22,8 +22,6 @@ import { store } from 'react-notifications-component';
 
 const bounceAnimation = keyframes`${bounce}`;
 
-
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -33,6 +31,7 @@ function General(props) {
   const [openVideo, setOpenVideo] = useState(false);
   const [openMic, setOpenMic] = useState(false);
   const [animation, setAnimation] = useState(false);
+  const [formulario, setFormulario] = useState(new Formulario());
 
   const { speak } = useSpeechSynthesis();
   const maxNumber = 69;
@@ -61,7 +60,25 @@ function General(props) {
 
     
   };
+  
+  const handleDataMSG = (e) => {
+    let msg = String(e.data);
+    //Ignora los mensajes que no son de daots.
+    if(!msg.startsWith('data:::')){return;}
+    let data = msg.split(":::")[1];
+    let key = data.split(':')[0];
+    let value = data.split(':')[1];
+    let form = formulario;
+    form[key] = value;
+    setFormulario(form);
+    console.log("data received: " + data);
+    console.log(formulario);
+  }
+
   const handleClose2 = (e) => {
+    let msg = String(e.data);
+    //Ignora los mensajes que son de datos.
+    if(msg.startsWith('data:::')) {return;}
     setMessage(e.data);
     setValue(true);
     document.getElementById("play").click();
@@ -71,7 +88,9 @@ function General(props) {
     
     setAnimation(!animation);
   }
-  useEffect (() => props.rtc.registrarCallbackMensajes(handleClose2), []);
+  useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
+
+  props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
  
   
   return (
@@ -130,6 +149,21 @@ function General(props) {
       </div>
     </div>
   );
+}
+
+function Formulario(){
+  this.nombres = '';
+  this.apellidos = '';
+  this.cedula = '';
+  this.placa = '';
+  this.numCarroceria = '';
+  this.tipoCarroceria = '';
+  this.numMotor = '';
+  this.numSerie = '';
+  this.combustible = '';
+  this.color = '';
+  this.cilindrada = '';
+  this.potencia = '';
 }
 
 export default General;

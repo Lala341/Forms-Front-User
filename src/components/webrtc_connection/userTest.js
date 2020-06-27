@@ -6,6 +6,7 @@ export default class rtc_connection {
 
 
     constructor() {
+        this.registeredCallbacks = [];
         this.messages = [];
         this.io = require('socket.io-client');
         this.socket = this.io('http://localhost:4000', {
@@ -34,7 +35,7 @@ export default class rtc_connection {
         this.dataChannel.addEventListener('message', (msg) => {
             console.log("msg received: " + msg.data);
             this.messages.push(msg.data);
-            console.log(this.messages);
+            // console.log(this.messages);
         });
 
 
@@ -103,11 +104,22 @@ export default class rtc_connection {
     }
 
     registrarCallbackMensajes(funcion) {
+        console.log("WebRTC: Message callback registered");
         if (this.dataChannel) {
             this.dataChannel.addEventListener('message', funcion);
         }
     }
 
+    registrarCallbackMensajesID(funcion, id) {
+        if (!(this.registeredCallbacks.includes(id))) {
+            this.registeredCallbacks.push(id);
+            console.log("WebRTC: Message callback registered: " + id);
+            if (this.dataChannel) {
+                this.dataChannel.addEventListener('message', funcion);
+            }
+            console.log(this.registeredCallbacks);
+        }
+    }
 
     async makeCall() {
         console.log("WebRTC>> makeCall()");
