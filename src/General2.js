@@ -32,7 +32,29 @@ function General(props) {
   const [openVideo, setOpenVideo] = useState(false);
   const [openMic, setOpenMic] = useState(false);
   const [animation, setAnimation] = useState(false);
-  const [formulario, setFormulario] = useState(new Formulario());
+  const [formulario, setFormulario] = useState({
+    nombres : '',
+    apellidos : '',
+    cedula : '',
+    placa : '',
+    numCarroceria : '',
+    tipoCarroceria : '',
+    numMotor : '',
+    numSerie : '',
+    combustible : '',
+    colores : '',
+    cilindrada : '',
+    potencia : '',
+    capacidad : '',
+    clase : '',
+    vin : '',
+    marca : '',
+    linea : '',
+    modelo : '',
+    blindaje : '',
+    desmonteBlindaje : ''
+  });
+
 
   const { speak } = useSpeechSynthesis();
   const maxNumber = 69;
@@ -69,11 +91,13 @@ function General(props) {
     let data = msg.split(":::")[1];
     let key = data.split(':')[0];
     let value = data.split(':')[1];
-    let form = formulario;
+    var form = formulario;
     form[key] = value;
+    console.log(value);
+    console.log(key);
+    console.log(data);
     setFormulario(form);
-    console.log("data received: " + data);
-    console.log(formulario);
+    setMessage(value);
   }
 
   const handleClose2 = (e) => {
@@ -89,9 +113,8 @@ function General(props) {
 
     setAnimation(!animation);
   }
-  useEffect(() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
+  useEffect(() => props.rtc.registrarCallbackMensajesID(handleDataMSG, "data"), []);
 
-  props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
 
 
   return (
@@ -100,35 +123,15 @@ function General(props) {
         <button type="button" class="btn btn-default" href="/recoletData" onClick={() => { window.location.href = "/recoletData" }} style={{ width: "300px", height: "300px", borderRadius: "150px", backgroundColor: "black", border: "solid white", color: "white", marginTop: "15%" }}><h1>Entrar</h1>
         </button>
       </div>
+      
       <div className="row">
-        <DataList form={formulario} />
+        <DataList formulario={formulario} {...props} />
 
       </div>
+
     </div>
   );
 }
 
-function Formulario() {
-  this.nombres = '';
-  this.apellidos = '';
-  this.cedula = '';
-  this.placa = '';
-  this.numCarroceria = '';
-  this.tipoCarroceria = '';
-  this.numMotor = '';
-  this.numSerie = '';
-  this.combustible = '';
-  this.colores = '';
-  this.cilindrada = '';
-  this.potencia = '';
-  this.capacidad = '';
-  this.clase = '';
-  this.vin = '';
-  this.marca = '';
-  this.linea = '';
-  this.modelo = '';
-  this.blindaje = '';
-  this.desmonteBlindaje = '';
-}
 
 export default General;

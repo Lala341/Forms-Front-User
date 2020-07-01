@@ -1,51 +1,39 @@
-import React from 'react';
-import { Formulario } from '../../General';
+import React, {useEffect} from 'react';
 
 import './dataList.css';
 
 
-class DataList extends React.Component {
-    constructor(props){
-        super(props)
-        this.form = props.form;
-    }
+function DataList(props){
 
-    updateComponent(pForm) {
-        this.form = pForm;
-    }
-
-    componentDidUpdate() {
-        console.log('DATALIST: Update');
-    }
-
-    renderLine(key) {
+  
+   const renderLine=(key)=> {
         return (
             <div className="row lefty justify-content-around">
                 <div className='col-6'>
                     {key}:
             </div>
                 <div className='col-6'>
-                    {this.props.form[key] === ''? '-' : this.props.form[key]}
+                    {props.formulario[key] === ''? '-' : props.formulario[key]}
             </div>
             </div>
         );
     }
 
-    renderAll() {
-        const fields = Object.keys(this.props.form);
+    const renderAll=() => {
+        var fields = Object.keys(props.formulario);
 
         return fields.map(field => (
-            <div>{this.renderLine(field)}</div>
+            <div>{renderLine(field)}</div>
         ));
     }
 
-    render() {
+    
         return (
             <div className="whiteText test">
-                {this.renderAll()}
+                {renderAll()}
             </div>
         );
-    }
+    
 }
 
 
