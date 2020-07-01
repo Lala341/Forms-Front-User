@@ -4,6 +4,7 @@ import './dataList.css';
 
 
 function DataList(props){
+    useEffect(() => console.log("update"), []);
 
   
    const renderLine=(key)=> {
