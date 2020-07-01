@@ -2,13 +2,16 @@ import React from 'react';
 import './App.css';
 import {Singleton} from './components/webrtc_connection/singleton';
 import VideoExample from './components/recordVideo/video';
+import RecolectData from './components/RecolectData';
+import RecolectDataFormat from './components/RecolectDataFormat';
+
 import 'react-notifications-component/dist/theme.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-import General from './General';
+import General from './General2';
 import ReactNotification from 'react-notifications-component';
 
 function App() {
@@ -30,6 +33,12 @@ function App() {
         </Route>
         <Route  exact path="/video">
           <VideoExample rtc={rtc} />
+        </Route>
+        <Route  exact path="/recoletData">
+          <RecolectData rtc={rtc} />
+        </Route>
+        <Route  exact path="/vf">
+          <RecolectDataFormat rtc={rtc} />
         </Route>
         </Switch>
 </Router>
