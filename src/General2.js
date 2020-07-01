@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import RecordAudio from "./components/recordAudio/recordAudio";
 import Button from '@material-ui/core/Button';
 import { useSpeechSynthesis } from 'react-speech-kit';
@@ -18,6 +18,7 @@ import ContactlessIcon from '@material-ui/icons/Contactless';
 import styled, { keyframes } from 'styled-components';
 import { bounce } from 'react-animations';
 import { store } from 'react-notifications-component';
+import DataList from './components/dataList/dataList';
 
 
 const bounceAnimation = keyframes`${bounce}`;
@@ -58,13 +59,13 @@ function General(props) {
   const handleClose = () => {
     setOpenMic(false);
 
-    
+
   };
-  
+
   const handleDataMSG = (e) => {
     let msg = String(e.data);
     //Ignora los mensajes que no son de daots.
-    if(!msg.startsWith('data:::')){return;}
+    if (!msg.startsWith('data:::')) { return; }
     let data = msg.split(":::")[1];
     let key = data.split(':')[0];
     let value = data.split(':')[1];
@@ -78,34 +79,36 @@ function General(props) {
   const handleClose2 = (e) => {
     let msg = String(e.data);
     //Ignora los mensajes que son de datos.
-    if(msg.startsWith('data:::')) {return;}
+    if (msg.startsWith('data:::')) { return; }
     setMessage(e.data);
     setValue(true);
     document.getElementById("play").click();
     triggerAnimation();
   }
-  const triggerAnimation=() =>{
-    
+  const triggerAnimation = () => {
+
     setAnimation(!animation);
   }
-  useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
+  useEffect(() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
 
   props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
- 
-  
+
+
   return (
     <div className="App">
       <div className="row justify-content-center">
-      <button type="button" class="btn btn-default" href="/recoletData" onClick={()=>{window.location.href= "/recoletData"}} style={{width:"300px", height:"300px", borderRadius: "150px", backgroundColor:"black", border: "solid white", color:"white", marginTop: "15%"}}><h1>Entrar</h1>
-                            </button>
+        <button type="button" class="btn btn-default" href="/recoletData" onClick={() => { window.location.href = "/recoletData" }} style={{ width: "300px", height: "300px", borderRadius: "150px", backgroundColor: "black", border: "solid white", color: "white", marginTop: "15%" }}><h1>Entrar</h1>
+        </button>
       </div>
-     
-     
+      <div className="row">
+        <DataList form={formulario} />
+
+      </div>
     </div>
   );
 }
 
-function Formulario(){
+function Formulario() {
   this.nombres = '';
   this.apellidos = '';
   this.cedula = '';

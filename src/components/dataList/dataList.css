@@ -1,0 +1,20 @@
+
+.whiteText {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 100px;
+}
+
+.test {
+    width: 50%;
+    /* margin: 1em auto; */
+    /* border: 1px solid grey; */
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    /* padding: .5em; */
+  }
+
+.lefty {
+    /* margin-right: auto; */
+  }

@@ -151,7 +151,7 @@ function General(props) {
   );
 }
 
-function Formulario(){
+export function Formulario(){
   this.nombres = '';
   this.apellidos = '';
   this.cedula = '';
