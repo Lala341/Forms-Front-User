@@ -6,6 +6,9 @@ import styled, { keyframes } from 'styled-components';
 import { bounce } from 'react-animations';
 import { store } from 'react-notifications-component';
 import iconCar from "../static/iconCar.png";
+import carroceria from "../static/carroceria.png";
+
+import DataList from './dataList/dataList';
 
 const bounceAnimation = keyframes`${bounce}`;
 
@@ -82,21 +85,26 @@ function RecolectDataFormat(props) {
   
   return (
       <div className="row" style={{color:"white"}}>
-        <div className="col-4">
+        <div className="col-4" style={{textAlign: "left"}}>
+          <h2>MC0404</h2>
+          <h6>BOG</h6>
        <img src={iconCar}></img>
-        
+        <DataList formulario={new Formulario()}/>
         </div>
-        <div className="col-4">
-          <h1>CARROCERÍA</h1>
+        <div className="col-4" style={{paddingTop: "10%"}}>
+          <h2>CARROCERÍA</h2>
         <div style={{padding: "20%", paddingTop: "5%"}}>
-          <h2 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{formulario.nombres}</h2>
-          <h2 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{formulario.placa}</h2>
+          <h5 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{formulario.nombres}</h5>
+          <h5 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{formulario.placa}</h5>
          
           </div>
-        
+          <img src={carroceria} width="100%"></img>
+       
         </div>
         <div className="col-4">
-       
+        <div className="row">
+        <Webcam height="50%" width="100%" style={{padding: "10%"}} />
+        </div>
         
         </div>
         

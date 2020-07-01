@@ -35,13 +35,13 @@ function App() {
             <VideoExample  />
           </Route>
           <Route exact path="/recoletData">
-            <RecolectData />
+            <RecolectData rtc={rtc}/>
           </Route>
           <Route exact path="/vf">
-            <RecolectDataFormat />
+            <RecolectDataFormat rtc={rtc}/>
           </Route>
           <Route exact path="/dataList">
-            <DataList>
+            <DataList rtc={rtc}>
 
             </DataList>
           </Route>
