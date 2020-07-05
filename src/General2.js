@@ -241,13 +241,16 @@ function General(props) {
       {currentPage}
       <IconButton id="play" onClick={() => speak({ text: message })} type="button" style={{ margin: "0.5%", backgroundColor: "black" }}></IconButton>
       <div>
+        Último mensaje: {message}
+      </div>
+      <div>
         <ButtonGroup>
           <IconButton id="previous" onClick={prevPage}
-            style={{ width: "60px", height: "60px", borderRadius: "150px", backgroundColor: "black", border: "solid white", color: "white", marginTop: "50%" }}>
+            style={{ width: "60px", height: "60px", borderRadius: "150px", backgroundColor: "black", border: "grey", color: "grey", marginTop: "50%" }}>
             {'<-'}
           </IconButton>
           <IconButton id="next" onClick={nextPage}
-            style={{ width: "60px", height: "60px", borderRadius: "150px", backgroundColor: "black", border: "solid white", color: "white", marginTop: "50%" }}>
+            style={{ width: "60px", height: "60px", borderRadius: "150px", backgroundColor: "black", border: "grey", color: "grey", marginTop: "50%" }}>
             {'->'}
           </IconButton>
 

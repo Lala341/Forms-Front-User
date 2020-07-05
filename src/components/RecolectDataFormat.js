@@ -86,7 +86,7 @@ function RecolectDataFormat(props) {
   return (
       <div className="row" style={{color:"white"}}>
         <div className="col-4" style={{textAlign: "left"}}>
-          <h2>MC0404</h2>
+          <h2>{props.formulario.placa}</h2>
           <h6>BOG</h6>
        <img src={iconCar}></img>
         <DataList formulario={props.formulario}/>
