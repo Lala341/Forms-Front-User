@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import RecordAudio from "./components/recordAudio/recordAudio";
 import Button from '@material-ui/core/Button';
 import { useSpeechSynthesis } from 'react-speech-kit';
@@ -19,6 +19,8 @@ import styled, { keyframes } from 'styled-components';
 import { bounce } from 'react-animations';
 import { store } from 'react-notifications-component';
 import DataList from './components/dataList/dataList';
+import RecolectData from './components/RecolectData';
+import rtc_connection from './components/webrtc_connection/userTest';
 
 
 const bounceAnimation = keyframes`${bounce}`;
@@ -33,29 +35,52 @@ function General(props) {
   const [openMic, setOpenMic] = useState(false);
   const [animation, setAnimation] = useState(false);
   const [formulario, setFormulario] = useState({
-    nombres : '',
-    apellidos : '',
-    cedula : '',
-    placa : '',
-    numCarroceria : '',
-    tipoCarroceria : '',
-    numMotor : '',
-    numSerie : '',
-    combustible : '',
-    colores : '',
-    cilindrada : '',
-    potencia : '',
-    capacidad : '',
-    clase : '',
-    vin : '',
-    marca : '',
-    linea : '',
-    modelo : '',
-    blindaje : '',
-    desmonteBlindaje : ''
+    nombres: ' ',
+    apellidos: ' ',
+    cedula: ' ',
+    placa: ' ',
+    numCarroceria: ' ',
+    tipoCarroceria: ' ',
+    numMotor: ' ',
+    numSerie: ' ',
+    combustible: ' ',
+    colores: ' ',
+    cilindrada: ' ',
+    potencia: ' ',
+    capacidad: ' ',
+    clase: ' ',
+    vin: ' ',
+    marca: ' ',
+    linea: ' ',
+    modelo: ' ',
+    blindaje: ' ',
+    desmonteBlindaje: ' '
   });
+  const currentIdRef = useRef(0);
 
 
+
+  const gotoRecolectData = () => {
+    currentIdRef.current = 1
+    setCurrentPage(
+      <RecolectData id='recolect1' rtc={props.rtc} formulario={formulario} />
+    )
+  }
+
+
+
+  const entrar =
+    (
+      <div className="row justify-content-center">
+        <button type="button" class="btn btn-default"
+          onClick={gotoRecolectData}
+          style={{ width: "300px", height: "300px", borderRadius: "150px", backgroundColor: "black", border: "solid white", color: "white", marginTop: "15%" }}>
+          <h1>Entrar</h1>
+        </button>
+      </div>
+    )
+
+  const [currentPage, setCurrentPage] = useState(entrar);
   const { speak } = useSpeechSynthesis();
   const maxNumber = 69;
   const onChange = imageList => {
@@ -84,10 +109,15 @@ function General(props) {
 
   };
 
-  const handleDataMSG = (e) => {
+  let handleDataMSG = (e) => {
     let msg = String(e.data);
     //Ignora los mensajes que no son de daots.
-    if (!msg.startsWith('data:::')) { return; }
+    if (!msg.startsWith('data:::')) {
+      // speak({ text: msg });
+      setMessage(msg);
+      document.getElementById("play").click();
+      return;
+    }
     let data = msg.split(":::")[1];
     let key = data.split(':')[0];
     let value = data.split(':')[1];
@@ -98,7 +128,28 @@ function General(props) {
     console.log(data);
     setFormulario(form);
     setMessage(value);
+    updatePage(currentIdRef.current);
   }
+
+  var updatePage = (id) => {
+    // console.log(id);
+    switch (id) {
+      case 0:
+        console.log("updatePage: Entrar");
+        setCurrentPage(entrar);
+        break;
+      case 1:
+        console.log("updatePage: recolect");
+        gotoRecolectData();
+        break;
+      case 2:
+        console.log('updatePage: recolectCC')
+      default:
+        break;
+    }
+  }
+
+
 
   const handleClose2 = (e) => {
     let msg = String(e.data);
@@ -113,22 +164,13 @@ function General(props) {
 
     setAnimation(!animation);
   }
-  useEffect(() => props.rtc.registrarCallbackMensajesID(handleDataMSG, "data"), []);
-
-
+  useEffect(() => props.rtc.registrarCallbackMensajesID(handleDataMSG, "data"), [])
+  // props.rtc.registrarCallbackMensajesID(handleDataMSG, "data")
 
   return (
     <div className="App">
-      <div className="row justify-content-center">
-        <button type="button" class="btn btn-default" href="/recoletData" onClick={() => { window.location.href = "/recoletData" }} style={{ width: "300px", height: "300px", borderRadius: "150px", backgroundColor: "black", border: "solid white", color: "white", marginTop: "15%" }}><h1>Entrar</h1>
-        </button>
-      </div>
-      
-      <div className="row">
-        <DataList formulario={formulario} {...props} />
-
-      </div>
-
+      {currentPage}
+      <IconButton id="play"onClick={() => speak({ text: message })} type="button" style={{ margin: "0.5%", backgroundColor:"black"}}></IconButton>
     </div>
   );
 }

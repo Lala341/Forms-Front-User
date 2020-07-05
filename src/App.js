@@ -36,10 +36,10 @@ function App() {
           <Route exact path="/video">
             <VideoExample  />
           </Route>
-          <Route exact path="/recoletData">
+          <Route exact path="/recolectData">
             <RecolectData rtc={rtc}/>
           </Route>
-          <Route exact path="/recoletData2">
+          <Route exact path="/recolectData2">
             <RecolectDataCC rtc={rtc}/>
           </Route>
           <Route exact path="/vf">
