@@ -21,6 +21,9 @@ import { store } from 'react-notifications-component';
 import DataList from './components/dataList/dataList';
 import RecolectData from './components/RecolectData';
 import rtc_connection from './components/webrtc_connection/userTest';
+import RecolectDataCC from './components/RecolectDataCC';
+import { ButtonGroup } from '@material-ui/core';
+import RecolectDataFormat from './components/RecolectDataFormat';
 
 
 const bounceAnimation = keyframes`${bounce}`;
@@ -64,6 +67,13 @@ function General(props) {
     currentIdRef.current = 1
     setCurrentPage(
       <RecolectData id='recolect1' rtc={props.rtc} formulario={formulario} />
+    )
+  }
+
+  const gotoRecolectData2 = () => {
+    currentIdRef.current = 2
+    setCurrentPage(
+      <RecolectDataCC rtc={props.rtc} formulario={formulario} />
     )
   }
 
@@ -112,6 +122,24 @@ function General(props) {
   let handleDataMSG = (e) => {
     let msg = String(e.data);
     //Ignora los mensajes que no son de daots.
+    console.log('Mensaje:' + msg);
+    if (msg.startsWith('control:::')) {
+      //Control
+      
+      let control = msg.split(':::')[1];
+      console.log('control msg: ' + control);
+      switch (control) {
+        case 'previousScreen':
+          prevPage();
+          break;
+        case 'nextScreen':
+          nextPage();
+          break;
+        default:
+          break;
+      }
+      return;
+    }
     if (!msg.startsWith('data:::')) {
       // speak({ text: msg });
       setMessage(msg);
@@ -144,6 +172,34 @@ function General(props) {
         break;
       case 2:
         console.log('updatePage: recolectCC')
+        gotoRecolectData2();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  const nextPage = () => {
+    switch (currentIdRef.current) {
+      case 0:
+        gotoRecolectData();
+        break;
+      case 1:
+        gotoRecolectData2();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  const prevPage = () => {
+    switch (currentIdRef.current) {
+      case 2:
+        gotoRecolectData();
+        break;
+
       default:
         break;
     }
@@ -157,7 +213,7 @@ function General(props) {
     if (msg.startsWith('data:::')) { return; }
     setMessage(e.data);
     setValue(true);
-    document.getElementById("play").click();
+    // document.getElementById("play").click();
     triggerAnimation();
   }
   const triggerAnimation = () => {
@@ -170,7 +226,20 @@ function General(props) {
   return (
     <div className="App">
       {currentPage}
-      <IconButton id="play"onClick={() => speak({ text: message })} type="button" style={{ margin: "0.5%", backgroundColor:"black"}}></IconButton>
+      <IconButton id="play" onClick={() => speak({ text: message })} type="button" style={{ margin: "0.5%", backgroundColor: "black" }}></IconButton>
+      <div>
+        <ButtonGroup>
+          <IconButton id="previous" onClick={prevPage}
+            style={{ width: "60px", height: "60px", borderRadius: "150px", backgroundColor: "black", border: "solid white", color: "white", marginTop: "50%" }}>
+            {'<-'}
+          </IconButton>
+          <IconButton id="next" onClick={nextPage}
+            style={{ width: "60px", height: "60px", borderRadius: "150px", backgroundColor: "black", border: "solid white", color: "white", marginTop: "50%" }}>
+            {'->'}
+          </IconButton>
+
+        </ButtonGroup>
+      </div>
     </div>
   );
 }

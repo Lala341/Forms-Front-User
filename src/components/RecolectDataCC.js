@@ -13,7 +13,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 function RecolectDataCC(props) {
-  const formulario = {};
   
   const [message, setMessage] = useState("");
   const [value, setValue] = useState(false);
@@ -21,7 +20,7 @@ function RecolectDataCC(props) {
   const [openMic, setOpenMic] = useState(false);
   const [animation, setAnimation] = useState(false);
 
-  const { speak } = useSpeechSynthesis();
+  // const { speak } = useSpeechSynthesis();
   const maxNumber = 69;
   const onChange = imageList => {
     // data for submit
@@ -63,20 +62,20 @@ function RecolectDataCC(props) {
   //   console.log(formulario);
   // }
 
-  const handleClose2 = (e) => {
-    let msg = String(e.data);
-    //Ignora los mensajes que son de datos.
-    if(msg.startsWith('data:::')) {return;}
-    setMessage(e.data);
-    setValue(true);
-    document.getElementById("play").click();
-    triggerAnimation();
-  }
+  // const handleClose2 = (e) => {
+  //   let msg = String(e.data);
+  //   //Ignora los mensajes que son de datos.
+  //   if(msg.startsWith('data:::')) {return;}
+  //   setMessage(e.data);
+  //   setValue(true);
+  //   document.getElementById("play").click();
+  //   triggerAnimation();
+  // }
   const triggerAnimation=() =>{
     
     setAnimation(!animation);
   }
-  useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
+  // useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
 
   // props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
  
@@ -95,8 +94,8 @@ function RecolectDataCC(props) {
           <h5>-Muestra la cédula a la cámara.</h5>
           <h5>-Ahora por detrás.</h5>
           <div style={{padding: "10%", paddingTop: "20%"}}>
-          <h2 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{formulario.nombres}</h2>
-          <h2 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{formulario.placa}</h2>
+          <h2 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>C.C: {props.formulario.cedula}</h2>
+          {/* <h2 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{props.formulario.placa}</h2> */}
          
           </div>
           <div style={{paddingTop: "10%"}}>

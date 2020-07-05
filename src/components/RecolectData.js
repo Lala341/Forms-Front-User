@@ -21,7 +21,7 @@ function RecolectData(props) {
   const [animation, setAnimation] = useState(false);
   // const [formulario, setFormulario] = useState(new Formulario());
 
-  const { speak } = useSpeechSynthesis();
+  // const { speak } = useSpeechSynthesis();
   const maxNumber = 69;
   const onChange = imageList => {
     // data for submit
