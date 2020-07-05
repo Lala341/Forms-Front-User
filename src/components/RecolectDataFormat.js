@@ -21,7 +21,7 @@ function RecolectDataFormat(props) {
   const [openVideo, setOpenVideo] = useState(false);
   const [openMic, setOpenMic] = useState(false);
   const [animation, setAnimation] = useState(false);
-  const [formulario, setFormulario] = useState(new Formulario());
+  // const [formulario, setFormulario] = useState(new Formulario());
 
   const { speak } = useSpeechSynthesis();
   const maxNumber = 69;
@@ -51,36 +51,36 @@ function RecolectDataFormat(props) {
     
   };
   
-  const handleDataMSG = (e) => {
-    let msg = String(e.data);
-    //Ignora los mensajes que no son de daots.
-    if(!msg.startsWith('data:::')){return;}
-    let data = msg.split(":::")[1];
-    let key = data.split(':')[0];
-    let value = data.split(':')[1];
-    let form = formulario;
-    form[key] = value;
-    setFormulario(form);
-    console.log("data received: " + data);
-    console.log(formulario);
-  }
+  // const handleDataMSG = (e) => {
+  //   let msg = String(e.data);
+  //   //Ignora los mensajes que no son de daots.
+  //   if(!msg.startsWith('data:::')){return;}
+  //   let data = msg.split(":::")[1];
+  //   let key = data.split(':')[0];
+  //   let value = data.split(':')[1];
+  //   let form = formulario;
+  //   form[key] = value;
+  //   setFormulario(form);
+  //   console.log("data received: " + data);
+  //   console.log(formulario);
+  // }
 
-  const handleClose2 = (e) => {
-    let msg = String(e.data);
-    //Ignora los mensajes que son de datos.
-    if(msg.startsWith('data:::')) {return;}
-    setMessage(e.data);
-    setValue(true);
-    document.getElementById("play").click();
-    triggerAnimation();
-  }
-  const triggerAnimation=() =>{
+  // const handleClose2 = (e) => {
+  //   let msg = String(e.data);
+  //   //Ignora los mensajes que son de datos.
+  //   if(msg.startsWith('data:::')) {return;}
+  //   setMessage(e.data);
+  //   setValue(true);
+  //   document.getElementById("play").click();
+  //   triggerAnimation();
+  // }
+  // const triggerAnimation=() =>{
     
-    setAnimation(!animation);
-  }
-  useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
+  //   setAnimation(!animation);
+  // }
+  // useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
 
-  props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
+  // props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
  
   
   return (
@@ -89,13 +89,13 @@ function RecolectDataFormat(props) {
           <h2>MC0404</h2>
           <h6>BOG</h6>
        <img src={iconCar}></img>
-        <DataList formulario={new Formulario()}/>
+        <DataList formulario={props.formulario}/>
         </div>
         <div className="col-4" style={{paddingTop: "10%"}}>
           <h2>CARROCERÍA</h2>
         <div style={{padding: "20%", paddingTop: "5%"}}>
-          <h5 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{formulario.nombres}</h5>
-          <h5 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{formulario.placa}</h5>
+          <h5 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{props.formulario.nombres}</h5>
+          <h5 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{props.formulario.placa}</h5>
          
           </div>
           <img src={carroceria} width="100%"></img>
@@ -112,29 +112,6 @@ function RecolectDataFormat(props) {
       
       
   );
-}
-
-function Formulario(){
-  this.nombres = 'Cristian Forero';
-  this.apellidos = '';
-  this.cedula = '';
-  this.placa = '';
-  this.numCarroceria = '';
-  this.tipoCarroceria = '';
-  this.numMotor = '';
-  this.numSerie = '';
-  this.combustible = '';
-  this.colores = '';
-  this.cilindrada = '';
-  this.potencia = '';
-  this.capacidad = '';
-  this.clase = '';
-  this.vin = '';
-  this.marca = '';
-  this.linea = '';
-  this.modelo = '';
-  this.blindaje = '';
-  this.desmonteBlindaje = '';
 }
 
 export default RecolectDataFormat;

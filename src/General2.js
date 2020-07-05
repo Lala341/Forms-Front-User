@@ -77,6 +77,13 @@ function General(props) {
     )
   }
 
+  const gotoRecolectDataFormat = () => {
+    currentIdRef.current = 4
+    setCurrentPage(
+      <RecolectDataFormat rtc={props.rtc} formulario={formulario} />
+    )
+  }
+
 
 
   const entrar =
@@ -174,7 +181,9 @@ function General(props) {
         console.log('updatePage: recolectCC')
         gotoRecolectData2();
         break;
-
+      case 4:
+        console.log('updatePage: recolectForm')
+        gotoRecolectDataFormat();
       default:
         break;
     }
@@ -188,7 +197,9 @@ function General(props) {
       case 1:
         gotoRecolectData2();
         break;
-
+      case 2:
+        gotoRecolectDataFormat();
+        break;
       default:
         break;
     }
@@ -199,7 +210,9 @@ function General(props) {
       case 2:
         gotoRecolectData();
         break;
-
+      case 4:
+        gotoRecolectData2();
+        break;
       default:
         break;
     }
