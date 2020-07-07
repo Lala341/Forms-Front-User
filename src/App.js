@@ -4,7 +4,7 @@ import { Singleton } from './components/webrtc_connection/singleton';
 import VideoExample from './components/recordVideo/video';
 import RecolectData from './components/RecolectData';
 import RecolectDataCC from './components/RecolectDataCC';
-
+import GeneralContraparte from './GeneralContraparte';
 import RecolectDataFormat from './components/RecolectDataFormat';
 import DataList from './components/dataList/dataList';
 import 'react-notifications-component/dist/theme.css';
@@ -36,19 +36,8 @@ function App() {
           <Route exact path="/video">
             <VideoExample  />
           </Route>
-          <Route exact path="/recolectData">
-            <RecolectData rtc={rtc}/>
-          </Route>
-          <Route exact path="/recolectData2">
-            <RecolectDataCC rtc={rtc}/>
-          </Route>
-          <Route exact path="/vf">
-            <RecolectDataFormat rtc={rtc}/>
-          </Route>
-          <Route exact path="/dataList">
-            <DataList rtc={rtc}>
-
-            </DataList>
+          <Route exact path="/contraparte">
+          <GeneralContraparte rtc={rtc} />
           </Route>
         </Switch>
       </Router>
