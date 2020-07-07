@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import RecordAudio from "./components/recordAudio/recordAudio";
-import Button from '@material-ui/core/Button';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import ImageUploading from "react-images-uploading";
 import ReplayIcon from '@material-ui/icons/Replay';
@@ -24,6 +22,8 @@ import rtc_connection from './components/webrtc_connection/userTest';
 import RecolectDataCC from './components/RecolectDataCC';
 import { ButtonGroup } from '@material-ui/core';
 import RecolectDataFormat from './components/RecolectDataFormat';
+import IdentifyProcess from './components/IdentifyProcess';
+import IdentifyParts from './components/IdentifyParts';
 
 
 const bounceAnimation = keyframes`${bounce}`;
@@ -76,7 +76,18 @@ function General(props) {
       <RecolectDataCC rtc={props.rtc} formulario={formulario} />
     )
   }
-
+  const gotoIdentifyProcess = () => {
+    currentIdRef.current = 3
+    setCurrentPage(
+      <IdentifyProcess next={nextPage} rtc={props.rtc} formulario={formulario} />
+    )
+  }
+  const gotoIdentifyParts = () => {
+    currentIdRef.current = 4
+    setCurrentPage(
+      <IdentifyParts rtc={props.rtc} formulario={formulario} />
+    )
+  }
 
 
   const entrar =
@@ -174,7 +185,15 @@ function General(props) {
         console.log('updatePage: recolectCC')
         gotoRecolectData2();
         break;
-
+      case 3:
+        console.log('updatePage: process')
+        gotoIdentifyProcess();
+        break;
+      case 4:
+        console.log('updatePage: parts')
+        gotoIdentifyParts();
+        break;
+      
       default:
         break;
     }
@@ -188,7 +207,14 @@ function General(props) {
       case 1:
         gotoRecolectData2();
         break;
-
+      case 2:
+        console.log('updatePage: process')
+        gotoIdentifyProcess();
+        break;
+      case 3:
+        console.log('updatePage: parts')
+        gotoIdentifyParts();
+        break;
       default:
         break;
     }
@@ -196,6 +222,7 @@ function General(props) {
 
   const prevPage = () => {
     switch (currentIdRef.current) {
+      
       case 2:
         gotoRecolectData();
         break;
