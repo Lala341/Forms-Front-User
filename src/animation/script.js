@@ -1,4 +1,4 @@
-function blah(){
+function move(){
   var waves = new SineWaves({
     el: document.getElementById('waves'),
     
@@ -70,7 +70,7 @@ function blah(){
   });
 }
 
-function shh(){
+function stop(){
   var waves = new SineWaves({
     el: document.getElementById('waves'),
     
@@ -139,12 +139,9 @@ function shh(){
     }
   });
 }
-var t = Math.floor(Math.random() * 5000000)
 
-function speak(){
-  blah()
-}
-
-function hush(){
-  shh()
+function speak(t){
+  t = t * 1000
+  move()
+  setTimeout(() => {  stop(); }, t)
 }
