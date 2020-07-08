@@ -5,25 +5,22 @@ import Slide from '@material-ui/core/Slide';
 import styled, { keyframes } from 'styled-components';
 import { bounce } from 'react-animations';
 import { store } from 'react-notifications-component';
-import iconCar from "../static/iconCar.png";
-import carroceria from "../static/carroceria.png";
 
-import DataList from './dataList/dataList';
 
 const bounceAnimation = keyframes`${bounce}`;
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-function RecolectDataFormat(props) {
+function RecolectDataCCContraparte(props) {
+  
   const [message, setMessage] = useState("");
   const [value, setValue] = useState(false);
   const [openVideo, setOpenVideo] = useState(false);
   const [openMic, setOpenMic] = useState(false);
   const [animation, setAnimation] = useState(false);
-  // const [formulario, setFormulario] = useState(new Formulario());
 
-  const { speak } = useSpeechSynthesis();
+  // const { speak } = useSpeechSynthesis();
   const maxNumber = 69;
   const onChange = imageList => {
     // data for submit
@@ -74,44 +71,66 @@ function RecolectDataFormat(props) {
   //   document.getElementById("play").click();
   //   triggerAnimation();
   // }
-  // const triggerAnimation=() =>{
+  const triggerAnimation=() =>{
     
-  //   setAnimation(!animation);
-  // }
+    setAnimation(!animation);
+  }
   // useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
 
   // props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
  
   
   return (
-      <div className="row" style={{color:"white"}}>
-        <div className="col-4" style={{textAlign: "left"}}>
-          <h2>{props.formulario.placa}</h2>
-          <h6>BOG</h6>
-       <img src={iconCar}></img>
-        <DataList formulario={props.formulario}/>
+    <div className="App" style={{color:"white"}}>
+      <div className="row">
+        <div className="col-6">
+        <div className="row">
+        <Webcam height="50%" width="100%" style={{padding: "10%"}}/>
         </div>
-        <div className="col-4" style={{paddingTop: "10%"}}>
-          <h2>CARROCERÍA</h2>
-        <div style={{padding: "20%", paddingTop: "5%"}}>
-          <h5 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{props.formulario.nombres}</h5>
-          <h5 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{props.formulario.placa}</h5>
+        
+        </div>
+        <div className="col-6" style={{padding: "10%", textAlign: "left", paddingTop: "10%"}}>
+          <h5 style={{textAlign: "center"}}>ACCESO DE VOZ</h5>
+          <h5>-Muestra la cédula a la cámara.</h5>
+          <h5>-Ahora por detrás.</h5>
+          <div style={{padding: "10%", paddingTop: "20%"}}>
+          <h2 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>C.C: {props.formulario.cedulaContraparte}</h2>
+          {/* <h2 style={{color: "grey", backgroundColor:"white", borderRadius:"10px", padding:"2%"}}>{props.formulario.placa}</h2> */}
          
           </div>
-          <img src={carroceria} width="100%"></img>
-       
+          <div style={{paddingTop: "10%"}}>
+          <h6 style={{color: "white"}}>{message}</h6>
+          </div>
         </div>
-        <div className="col-4">
-        <div className="row">
-        <Webcam height="50%" width="100%" style={{padding: "10%"}} />
-        </div>
-        
-        </div>
-        
             </div>
       
       
+      
+    </div>
   );
 }
 
-export default RecolectDataFormat;
+function Formulario(){
+  this.nombres = 'Cristian Forero';
+  this.apellidos = '';
+  this.cedula = '';
+  this.placa = '';
+  this.numCarroceria = '';
+  this.tipoCarroceria = '';
+  this.numMotor = '';
+  this.numSerie = '';
+  this.combustible = '';
+  this.colores = '';
+  this.cilindrada = '';
+  this.potencia = '';
+  this.capacidad = '';
+  this.clase = '';
+  this.vin = '';
+  this.marca = '';
+  this.linea = '';
+  this.modelo = '';
+  this.blindaje = '';
+  this.desmonteBlindaje = '';
+}
+
+export default RecolectDataCCContraparte;

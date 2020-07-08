@@ -17,14 +17,14 @@ import styled, { keyframes } from 'styled-components';
 import { bounce } from 'react-animations';
 import { store } from 'react-notifications-component';
 import DataList from './components/dataList/dataList';
-import RecolectData from './components/RecolectData';
+import RecolectDataContraparte from './components/RecolectDataContraparte';
 import rtc_connection from './components/webrtc_connection/userTest';
-import RecolectDataCC from './components/RecolectDataCC';
+import RecolectDataCCContraparte from './components/RecolectDataCCContraparte';
 import { ButtonGroup } from '@material-ui/core';
 import RecolectDataFormat from './components/RecolectDataFormat';
 import IdentifyProcess from './components/IdentifyProcess';
 import IdentifyParts from './components/IdentifyParts';
-import VerifyDocument from './components/VerifyDocument';
+import ContraparteContrato from './components/Contract';
 
 
 const bounceAnimation = keyframes`${bounce}`;
@@ -32,70 +32,71 @@ const bounceAnimation = keyframes`${bounce}`;
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-function General(props) {
+function GeneralContraparte(props) {
   const [message, setMessage] = useState("");
   const [value, setValue] = useState(false);
   const [openVideo, setOpenVideo] = useState(false);
   const [openMic, setOpenMic] = useState(false);
   const [animation, setAnimation] = useState(false);
   const [formulario, setFormulario] = useState({
-    nombres: ' ',
-    apellidos: ' ',
-    cedula: ' ',
-    placa: ' ',
-    numCarroceria: ' ',
-    tipoCarroceria: ' ',
-    numMotor: ' ',
-    numSerie: ' ',
-    combustible: ' ',
-    colores: ' ',
-    cilindrada: ' ',
-    potencia: ' ',
+    nombres: 'Juan David',
+    apellidos: 'Zambrano',
+    cedula: '1020937483',
+    placa: 'ABC 123',
+    numCarroceria: 'AX919123JS',
+    tipoCarroceria: 'Hatchback',
+    numMotor: 'AX919123JS',
+    numSerie: 'AX919123JS',
+    combustible: 'Gasolina',
+    colores: 'Plata Sirius Metálico',
+    cilindrada: '1598cc',
+    potencia: '99hp',
     capacidad: ' ',
-    clase: ' ',
-    vin: ' ',
-    marca: ' ',
-    linea: ' ',
-    modelo: ' ',
+    clase: 'particular',
+    vin: 'AX919123JS',
+    marca: 'Volkswagen',
+    linea: 'Gol Trendline',
+    modelo: '2017',
     blindaje: ' ',
-    desmonteBlindaje: ' '
+    desmonteBlindaje: ' ',
+    nombresContraparte: ' ',
+    apellidosContraparte: ' ',
+    cedulaContraparte: ' ',
   });
   const currentIdRef = useRef(0);
 
 
-
+  /**
+   * Nombre, placa
+   */
   const gotoRecolectData = () => {
     currentIdRef.current = 1
     setCurrentPage(
-      <RecolectData id='recolect1' rtc={props.rtc} formulario={formulario} />
+      <RecolectDataContraparte id='recolect1' rtc={props.rtc} formulario={formulario} />
     )
   }
 
+  /**
+   * Cedula
+   */
   const gotoRecolectData2 = () => {
     currentIdRef.current = 2
     setCurrentPage(
-      <RecolectDataCC rtc={props.rtc} formulario={formulario} />
+      <RecolectDataCCContraparte rtc={props.rtc} formulario={formulario} />
     )
   }
-  const gotoIdentifyProcess = () => {
-    currentIdRef.current = 4
-    setCurrentPage(
-      <IdentifyProcess next={nextPage} rtc={props.rtc} formulario={formulario} />
-    )
-  }
-  const gotoIdentifyParts = () => {
-    currentIdRef.current = 5
-    setCurrentPage(
-      <IdentifyParts rtc={props.rtc} formulario={formulario} />
-    )
-  }
-
-  const gotoVerifyDocument = () => {
+  /**
+   * Contrato
+   */
+  const gotoContracto = () => {
     currentIdRef.current = 3
     setCurrentPage(
-      <VerifyDocument  next={nextPage} rtc={props.rtc} formulario={formulario} />
+      <ContraparteContrato rtc={props.rtc} formulario={formulario} />
     )
   }
+  
+
+
   const entrar =
     (
       <div className="row justify-content-center">
@@ -192,16 +193,8 @@ function General(props) {
         gotoRecolectData2();
         break;
       case 3:
-        console.log('updatePage: document')
-        gotoVerifyDocument();
-        break;
-      case 4:
-        console.log('updatePage: parts')
-        gotoIdentifyProcess();
-        break;
-      case 5:
-        console.log('updatePage: parts')
-        gotoIdentifyParts();
+        console.log('updatePage: contrato ')
+        gotoContracto();
         break;
       default:
         break;
@@ -217,16 +210,8 @@ function General(props) {
         gotoRecolectData2();
         break;
       case 2:
-        console.log('updatePage: document')
-        gotoVerifyDocument();
-        break;
-      case 3:
         console.log('updatePage: process')
-        gotoIdentifyProcess();
-        break;
-      case 4:
-        console.log('updatePage: parts')
-        gotoIdentifyParts();
+        gotoContracto();
         break;
       default:
         break;
@@ -239,7 +224,7 @@ function General(props) {
       case 2:
         gotoRecolectData();
         break;
-      case 4:
+      case 3:
         gotoRecolectData2();
         break;
       default:
@@ -290,4 +275,4 @@ function General(props) {
 }
 
 
-export default General;
+export default GeneralContraparte;

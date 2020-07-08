@@ -26,7 +26,7 @@ function IdentifyParts(props) {
   const [openVideo, setOpenVideo] = useState(false);
   const [openMic, setOpenMic] = useState(false);
   const [animation, setAnimation] = useState(false);
-  const [formulario, setFormulario] = useState(new Formulario());
+  // const [formulario, setFormulario] = useState(new Formulario());
 
   const { speak } = useSpeechSynthesis();
   const maxNumber = 69;
@@ -56,19 +56,19 @@ function IdentifyParts(props) {
     
   };
   
-  const handleDataMSG = (e) => {
-    let msg = String(e.data);
-    //Ignora los mensajes que no son de daots.
-    if(!msg.startsWith('data:::')){return;}
-    let data = msg.split(":::")[1];
-    let key = data.split(':')[0];
-    let value = data.split(':')[1];
-    let form = formulario;
-    form[key] = value;
-    setFormulario(form);
-    console.log("data received: " + data);
-    console.log(formulario);
-  }
+  // const handleDataMSG = (e) => {
+  //   let msg = String(e.data);
+  //   //Ignora los mensajes que no son de daots.
+  //   if(!msg.startsWith('data:::')){return;}
+  //   let data = msg.split(":::")[1];
+  //   let key = data.split(':')[0];
+  //   let value = data.split(':')[1];
+  //   let form = formulario;
+  //   form[key] = value;
+  //   setFormulario(form);
+  //   console.log("data received: " + data);
+  //   console.log(formulario);
+  // }
 
   const handleClose2 = (e) => {
     let msg = String(e.data);
@@ -83,9 +83,9 @@ function IdentifyParts(props) {
     
     setAnimation(!animation);
   }
-  useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
+  // useEffect (() => props.rtc.registrarCallbackMensajesID(handleClose2, 'mensajes'), []);
 
-  props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
+  // props.rtc.registrarCallbackMensajesID(handleDataMSG, "data");
  
   
   return (
@@ -93,7 +93,7 @@ function IdentifyParts(props) {
       <div className="row" style={{color:"white"}}>
         <div className="col-3" style={{textAlign: "left"}}>
           
-        <DataList formulario={new Formulario()}/>
+        <DataList formulario={props.formulario}/>
         </div>
         <div className="col-5" style={{paddingTop: "2%"}}>
         <img src={iconCar} width="100%"></img>

@@ -1,27 +1,27 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 import './dataList.css';
 
 
-function DataList(props){
+function DataList(props) {
     useEffect(() => console.log("update"), []);
 
-  
-   const renderLine=(key, title)=> {
+
+    const renderLine = (key, title) => {
         return (
             <div className="row lefty justify-content-around">
                 <div className='col-6'>
-                    {title}:
-            </div>
+                    {title + ': '}
+                </div>
                 <div className='col-6'>
-                    {props.formulario[key] === ''? '-' : props.formulario[key]}
-            </div>
+                    {props.formulario[key] === '' ? '-' : props.formulario[key]}
+                </div>
             </div>
         );
     }
 
     const renderSlected = () => {
-        return(
+        return (
             <div>
                 <div>{renderLine('marca', 'Marca')}</div>
                 <div>{renderLine('linea', 'Línea')}</div>
@@ -39,7 +39,7 @@ function DataList(props){
         );
     }
 
-    const renderAll=() => {
+    const renderAll = () => {
         var fields = Object.keys(props.formulario);
 
         return fields.map(field => (
@@ -47,14 +47,14 @@ function DataList(props){
         ));
     }
 
-    
-        return (
-            <div className="whiteText test">
-                {/* {renderAll()} */}
-                {renderSlected()}
-            </div>
-        );
-    
+
+    return (
+        <div className="whiteText test">
+            {/* {renderAll()} */}
+            {renderSlected()}
+        </div>
+    );
+
 }
 
 
