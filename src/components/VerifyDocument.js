@@ -76,7 +76,7 @@ export default function VerifyDocument(props) {
 
   return (
     <div >
-      <div className="row justify-content-center" style={{paddingTop: "10%"}}>
+      <div className="row justify-content-center" style={{paddingTop: "10%", paddingBottom: "5%"}}>
       <img src={icon1} alt="icono"></img>
       </div>
       <div className="row justify-content-center">
