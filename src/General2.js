@@ -24,6 +24,7 @@ import { ButtonGroup } from '@material-ui/core';
 import RecolectDataFormat from './components/RecolectDataFormat';
 import IdentifyProcess from './components/IdentifyProcess';
 import IdentifyParts from './components/IdentifyParts';
+import VerifyDocument from './components/VerifyDocument';
 
 
 const bounceAnimation = keyframes`${bounce}`;
@@ -77,19 +78,24 @@ function General(props) {
     )
   }
   const gotoIdentifyProcess = () => {
-    currentIdRef.current = 3
+    currentIdRef.current = 4
     setCurrentPage(
       <IdentifyProcess next={nextPage} rtc={props.rtc} formulario={formulario} />
     )
   }
   const gotoIdentifyParts = () => {
-    currentIdRef.current = 4
+    currentIdRef.current = 5
     setCurrentPage(
       <IdentifyParts rtc={props.rtc} formulario={formulario} />
     )
   }
 
-
+  const gotoVerifyDocument = () => {
+    currentIdRef.current = 3
+    setCurrentPage(
+      <VerifyDocument  next={nextPage} rtc={props.rtc} formulario={formulario} />
+    )
+  }
   const entrar =
     (
       <div className="row justify-content-center">
@@ -186,14 +192,17 @@ function General(props) {
         gotoRecolectData2();
         break;
       case 3:
-        console.log('updatePage: process')
-        gotoIdentifyProcess();
+        console.log('updatePage: document')
+        gotoVerifyDocument();
         break;
       case 4:
         console.log('updatePage: parts')
+        gotoIdentifyProcess();
+        break;
+      case 5:
+        console.log('updatePage: parts')
         gotoIdentifyParts();
         break;
-      
       default:
         break;
     }
@@ -208,10 +217,14 @@ function General(props) {
         gotoRecolectData2();
         break;
       case 2:
+        console.log('updatePage: document')
+        gotoVerifyDocument();
+        break;
+      case 3:
         console.log('updatePage: process')
         gotoIdentifyProcess();
         break;
-      case 3:
+      case 4:
         console.log('updatePage: parts')
         gotoIdentifyParts();
         break;
